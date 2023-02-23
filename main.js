@@ -294,7 +294,7 @@ function showUploadButton() {
                                  ' לעלות תמונת פרופיל שלך.';
   ;
   messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אני ממליצה להצטלם:';
-  messageUploadP3.textContent = '1. עם הפנים הפונות ישר למצלמה';
+  messageUploadP3.textContent = '1. תמונת פנים בלבד כאשר הן פונות ישר למצלמה';
   messageUploadP4.textContent = '2. על רקע לבן';
   messageUploadImage.appendChild(messageUploadP1);
   messageUploadImage.appendChild(messageUploadP2)
