@@ -78,12 +78,6 @@ p {
   background-color: var(--dark2);
 }
 
-/*.button-message button {
-  background-color: var(--dark2);
-  border: none;
-  color: var(--dark);
-}*/
-
 button {
   font-family: Rubik;
   font-size: 16px;
@@ -96,6 +90,16 @@ button {
   font-weight: bold;
   margin-left: 6px;
 }
+
+
+button:hover {
+  color: var(--dark2);
+  background-color: var(--light);
+}
+
+button.clicked {
+  color: var(--dark2);
+  background-color: var(--light);
 
 
 .line {
@@ -212,21 +216,6 @@ button {
 
   #conversation {
     height: calc(100vh - 50px); /* Subtract the height of the input field and button */
-  }
-
-}
-
-/* For screens smaller than 768px (mobile devices) */
-@media (min-width: 767px) {
-
-  button:hover {
-    color: var(--dark2);
-    background-color: var(--light);
-  }
-
-  button.clicked {
-    color: var(--dark2);
-    background-color: var(--light);
   }
 
 }
