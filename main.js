@@ -70,7 +70,12 @@ function showImageResults() {
       chatbotResponse.appendChild(refElement);
 
       conversation.appendChild(chatbotResponse);
-      conversation.scrollTop = conversation.scrollHeight;
+
+      refElement.onload = () => {
+        conversation.scrollTop = conversation.scrollHeight;
+      };
+
+
 
       setTimeout(function () {
         showCostumeOptions();

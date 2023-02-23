@@ -117,14 +117,16 @@ button {
   top: 60px;
   max-width: 80px;
   max-height: 80px;
+  object-fit: cover;
 }
 
 .user-image-doctor {
   position: absolute;
   left: 145px;
   top: 95px;
-  max-width: 90px;
-  max-height: 90px;
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
 }
 
 .user-image-fairy {
