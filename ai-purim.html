@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Purim</title>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    /* Styling for the overlay */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      top: 0; left: 0; bottom: 0; right: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Rubik;
+      font-size: 16px;
+      color: var(--light);
+      background-color: var(--dark);
+    }
+
+    @keyframes float {
+      0% {
+        /*box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);*/
+        transform: translatey(0px);
+      }
+      50% {
+        /*box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);*/
+        transform: translatey(-20px);
+      }
+      100% {
+        /*box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);*/
+        transform: translatey(0px);
+      }
+    }
+    #main-area {
+      width: 50%;
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      ;
+    }
+
+    #logo {
+      height: 150px;
+      display: block;
+      animation: float 6s ease-in-out infinite;
+      margin-bottom: 40px;
+    }
+
+    #overlay-btn {
+      display: block;
+      margin-bottom: 10px;
+      width: 200px;
+    }
+
+    #start-btn {
+      width: 200px;
+      display: block;
+      color: var(--dark);
+      background-color: var(--accent);
+      border: none;
+    }
+
+    #start-btn:hover {
+      background-color: var(--light);
+    }
+
+    p a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body style="background-color: var(--dark);">
+<div id="main-area">
+  <img src="img/logo.svg" alt="AI PuRIM" id="logo">
+  <button id="overlay-btn">מה זה זה?</button>
+  <button id="start-btn" onclick="location.href='index.html';">אני רוצה לנסות</button>
+</div>
+<div class="overlay" id="overlay">
+    <h2 style="text-align: right; text-align: justify-all;">היי שלום</h2>
+    <p style="max-width: 300px; text-align: justify-all; margin-bottom: 30px">
+      ברוכים הבאים ל-<b> AI PuRIM</b><br>
+      הבוט הראשון הבנוי מבינה מלאכותית שעוזר לכם לראות איך תראו עם תחפושות מסויימות.<br>
+      אנחנו משתמשים בטכנולוגיות הכי מתקדמות בשוק כדי להציג את התוצאות ומקווים שתהנו.<br>
+      <br>
+      מי זה אנחנו?<br>
+      אנחנו זה בעצם בחור אחד בשם גיל כהן שהרגיש שיותר רשמי לכתוב ברבים.<br>
+      כיום גיל הוא פרודקט דיזיינר אבל בעברו הוא קודד, דיבב סרטים מצויירים והיה מאלתר על במות.<br>
+      הוא גם היה שותף בבניית
+      <a href="https://treenderapp.com"><b>טרינדר</b></a>
+      אפליקציית ההכרויות לעצים ו-
+<a href="https://knesset.run"><b>      המירוץ לכנסת</b></a>
+      משחק שבו הפוליטקאים באמת רצים בשבילנו.
+    </p>
+    <button id="close-btn">ביי שלום</button>
+</div>
+<script>
+  // JavaScript to handle the overlay
+  const overlayBtn = document.getElementById('overlay-btn');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('close-btn');
+
+  overlayBtn.addEventListener('click', function() {
+    overlay.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', function() {
+    overlay.style.display = 'none';
+  });
+</script>
+</body>
+</html>
