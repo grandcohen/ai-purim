@@ -133,64 +133,72 @@ button {
   position: absolute;
   left: 210px;
   top: 70px;
-  max-width: 80px;
-  max-height: 80px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
 }
 
 .user-image-madhat {
   position: absolute;
   left: 160px;
   top: 160px;
-  max-width: 100px;
-  max-height: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .user-image-hp {
   position: absolute;
   left: 140px;
   top: 60px;
-  max-width: 80px;
-  max-height: 80px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
 }
 
 .user-image-pirate {
   position: absolute;
   left: 110px;
   top: 90px;
-  max-width: 100px;
-  max-height: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .user-image-spiderman {
   position: absolute;
   left: 180px;
   top: 20px;
-  max-width: 80px;
-  max-height: 80px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
 }
 
 .user-image-witch {
   position: absolute;
   left: 140px;
   top: 95px;
-  max-width: 100px;
-  max-height: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .user-image-wonder {
   position: absolute;
   left: 120px;
   top: 50px;
-  max-width: 90px;
-  max-height: 90px;
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
 }
 
 .user-image-batman {
   position: absolute;
   left: 120px;
   top: 90px;
-  max-width: 100px;
-  max-height: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 /* For screens smaller than 768px (mobile devices) */
