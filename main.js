@@ -37,12 +37,16 @@ function showImageResults() {
     messagePreImageDone.textContent = 'סיימתי. ' +
                                         (isMale?'מוכן?':'מוכנה?');
     conversation.appendChild(messagePreImageLoad);
+    conversation.scrollTop = conversation.scrollHeight;
+
   } else if (counterTimes < textPostImageResult.length) {
     messagePreImageLoad.textContent = 'סבבה עובדת על זה';
     messagePreImageDone.textContent = 'יאללה ' +
                                         (isMale?'קבל ':'מה ') +
                                         'הכנתי לך';
     conversation.appendChild(messagePreImageLoad);
+    conversation.scrollTop = conversation.scrollHeight;
+
   } else {
     messagePreImageDone.textContent = 'הנה ' +
                                       (isMale?'קח':'קחי');
@@ -51,6 +55,8 @@ function showImageResults() {
   setTimeout(function () {
 
     conversation.appendChild(messagePreImageDone);
+    conversation.scrollTop = conversation.scrollHeight;
+
     setTimeout(function () {
       // uploaded
       const imgElement = document.createElement('img');
@@ -90,10 +96,14 @@ function showCostumeOptions() {
         ' רוצה להתחפש?';
       counterTimes++;
       conversation.appendChild(messageOkUpload);
+      conversation.scrollTop = conversation.scrollHeight;
+
     } else {
       if (counterTimes<textPostImageResult.length) {
         counterTimes++;
         conversation.appendChild(messageOkUpload);
+        conversation.scrollTop = conversation.scrollHeight;
+
       }
       messageBeforeCotumes.textContent =
         'מה '
@@ -301,6 +311,7 @@ function showUploadButton() {
   messageUploadImage.appendChild(messageUploadP3);
   messageUploadImage.appendChild(messageUploadP4);
   conversation.appendChild(messageUploadImage);
+  conversation.scrollTop = conversation.scrollHeight;
 
   // Create button message
   const messageUploadButton = document.createElement('div');
@@ -349,6 +360,7 @@ function showUploadButton() {
 
   messageUploadButton.appendChild(uploadButton);
   conversation.appendChild(messageUploadButton);
+  conversation.scrollTop = conversation.scrollHeight;
 }
 
 
@@ -370,6 +382,7 @@ function showGender() {
   maleButton.addEventListener('click', listenerMale);
   messageGender.appendChild(maleButton);
   conversation.appendChild(messageGender);
+  conversation.scrollTop = conversation.scrollHeight;
 
   // Female
   const femaleButton = document.createElement('button');
@@ -377,10 +390,10 @@ function showGender() {
   femaleButton.addEventListener('click', listenerFemale);
   messageGender.appendChild(femaleButton);
   conversation.appendChild(messageGender);
+  conversation.scrollTop = conversation.scrollHeight;
 
 
   // Message gender result
-  //conversation.appendChild(lineBreak);
   const messageGenderResult = document.createElement('div');
   messageGenderResult.classList.add('message', 'chatbot');
 
@@ -389,6 +402,7 @@ function showGender() {
     setTimeout(function() {
       messageGenderResult.textContent = 'אין בעיה, אפנה אליך בלשון זכר';
       conversation.appendChild(messageGenderResult);
+      conversation.scrollTop = conversation.scrollHeight;
       isMale = true;
       removeListnersForGender();
       setTimeout( function (){
@@ -402,6 +416,7 @@ function showGender() {
     setTimeout(function() {
       messageGenderResult.textContent = 'אין בעיה, אפנה אלייך בלשון נקבה';
       conversation.appendChild(messageGenderResult);
+      conversation.scrollTop = conversation.scrollHeight;
       isMale = false;
       removeListnersForGender();
       setTimeout(  function () {
@@ -479,6 +494,7 @@ function initPage() {
     messageHello.classList.add('message', 'chatbot');
     messageHello.textContent = 'שלום לך';
     conversation.appendChild(messageHello);
+    conversation.scrollTop = conversation.scrollHeight;
 
   setTimeout(function() {
 
@@ -491,6 +507,7 @@ function initPage() {
     messageWhoAmI.appendChild(messageWhoAmI1);
     messageWhoAmI.appendChild(messageWhoAmI2);
     conversation.appendChild(messageWhoAmI);
+    conversation.scrollTop = conversation.scrollHeight;
 
     setTimeout(function () {
 
@@ -503,6 +520,7 @@ function initPage() {
       messageHowDoes.appendChild(messageHowDoes1);
       messageHowDoes.appendChild(messageHowDoes2);
       conversation.appendChild(messageHowDoes);
+      conversation.scrollTop = conversation.scrollHeight;
 
       setTimeout(  function () {
         showGender();
