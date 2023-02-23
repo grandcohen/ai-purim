@@ -80,7 +80,12 @@ button {
 }
 
 button:hover {
-  color: var(--dark);
+  color: var(--dark2);
+  background-color: var(--light);
+}
+
+button.clicked {
+  color: var(--dark2);
   background-color: var(--light);
 }
 
@@ -115,31 +120,31 @@ button:hover {
 
 .user-image-fairy {
   position: absolute;
-  left: 145px;
-  top: 95px;
+  left: 160px;
+  top: 60px;
   max-width: 60px;
   max-height: 60px;
 }
 
 .user-image-madhat {
   position: absolute;
-  left: 145px;
-  top: 95px;
-  max-width: 60px;
-  max-height: 60px;
+  left: 160px;
+  top: 160px;
+  max-width: 100px;
+  max-height: 100px;
 }
 
 .user-image-hp {
   position: absolute;
-  left: 145px;
-  top: 95px;
-  max-width: 60px;
-  max-height: 60px;
+  left: 140px;
+  top: 60px;
+  max-width: 80px;
+  max-height: 80px;
 }
 
 .user-image-pirate {
   position: absolute;
-  left: 145px;
+  left: 150px;
   top: 95px;
   max-width: 60px;
   max-height: 60px;
@@ -147,32 +152,32 @@ button:hover {
 
 .user-image-spiderman {
   position: absolute;
-  left: 145px;
-  top: 95px;
-  max-width: 60px;
-  max-height: 60px;
+  left: 180px;
+  top: 20px;
+  max-width: 80px;
+  max-height: 80px;
 }
 
 .user-image-witch {
   position: absolute;
-  left: 145px;
+  left: 140px;
   top: 95px;
-  max-width: 60px;
-  max-height: 60px;
+  max-width: 100px;
+  max-height: 100px;
 }
 
 .user-image-wonder {
   position: absolute;
-  left: 145px;
-  top: 95px;
-  max-width: 60px;
-  max-height: 60px;
+  left: 140px;
+  top: 40px;
+  max-width: 75px;
+  max-height: 75px;
 }
 
 .user-image-batman {
   position: absolute;
-  left: 145px;
-  top: 95px;
+  left: 110px;
+  top: 130px;
   max-width: 60px;
   max-height: 60px;
 }

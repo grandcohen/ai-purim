@@ -1,9 +1,19 @@
 const conversation = document.getElementById('conversation');
 let selectedCostume = '';
 let isMale = true;
-let isFirstTime = true;
+let counterTimes = 0;
 const lineBreak = document.createElement('br');
 const TIMEOUT = 800;
+
+const textPostImageResult = ['מצויין, התמונה עלתה',
+                              'אהבת?? אין אני מלכהההה. חחחח מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? וואי הרגת, אני פיפי',
+                              'נו איך יצא הפעם? טוב הא?',
+                                'העיקר בהתחלה צחקת עליי והנה תראה אותך.',
+                              isMale?'חחחח מישהו פה התמכר':'חחחח מישהי פה התמכרה',
+                              isMale?'אתה לא יכול בלעדיי הא?':'נשמההה מישהי פה נהיית אחות בלב',
+                              isMale?'טוב אתה מתחיל להגזים, זה מתחיל להיות בגדר הטרדה':'טוב מאמי אין לי באמת את כל היום, עוד אנשים רוצים לדבר איתי',
+                              isMale?'טוב חלאס. אני שמה את עצמי על בינה אוטומטית. סלמתק.':'טוב אני זזה, שמה את עצמי על בינה אוטומטית. ביי חיים.'];
+
 
 // CROP
 //const imageCropperOverlay = document.getElementById('image-cropper-overlay');
@@ -18,13 +28,25 @@ function showImageResults() {
   const messagePreImageLoad = document.createElement('div');
   const messagePreImageDone = document.createElement('div');
   const chatbotResponse = document.createElement('div');
-  messagePreImageLoad.classList.add('message');
-  messagePreImageLoad.textContent = 'אין בעיה, רק רגע';
-  messagePreImageDone.classList.add('message')
-  messagePreImageDone.textContent = 'הנה זה מוכן';
   chatbotResponse.classList.add('message', 'chatbot', 'image-container');
+  messagePreImageLoad.classList.add('message');
+  messagePreImageDone.classList.add('message')
 
-  conversation.appendChild(messagePreImageLoad);
+  if (counterTimes == 1) {
+    messagePreImageLoad.textContent = 'אין בעיה, רק רגע בבקשה';
+    messagePreImageDone.textContent = 'סיימתי. ' +
+                                        (isMale?'מוכן?':'מוכנה?');
+    conversation.appendChild(messagePreImageLoad);
+  } else if (counterTimes < textPostImageResult.length) {
+    messagePreImageLoad.textContent = 'סבבה עובדת על זה';
+    messagePreImageDone.textContent = 'יאללה ' +
+                                        (isMale?'קבל ':'מה ') +
+                                        'הכנתי לך';
+    conversation.appendChild(messagePreImageLoad);
+  } else {
+    messagePreImageDone.textContent = 'הנה ' +
+                                      (isMale?'קח':'קחי');
+  }
 
   setTimeout(function () {
 
@@ -47,8 +69,8 @@ function showImageResults() {
       setTimeout(function () {
         showCostumeOptions();
       }, TIMEOUT);
-    }, TIMEOUT);
-  }, TIMEOUT+TIMEOUT);
+    }, TIMEOUT+TIMEOUT);
+  }, TIMEOUT);
 }
 
 function showCostumeOptions() {
@@ -57,18 +79,28 @@ function showCostumeOptions() {
   messageBeforeCotumes.classList.add('message', 'chatbot');
   messageOkUpload.classList.add('message', 'chatbot');
 
+  messageOkUpload.textContent = textPostImageResult[counterTimes];
+  console.log('counter before: '+counterTimes)
+
   setTimeout( function () {
-    if (isFirstTime) {
-      messageOkUpload.textContent = 'מצויין, התמונה עלתה';
+    if (counterTimes==0) {
       messageBeforeCotumes.textContent =
         'ועכשיו לחלק האומנותי. למה '
         + (isMale ? 'אתה' : 'את') +
         ' רוצה להתחפש?';
-      isFirstTime = false;
+      counterTimes++;
       conversation.appendChild(messageOkUpload);
     } else {
-      messageBeforeCotumes.textContent = 'אהבת הא? אין אני מלך. יאללה עוד פעם?';
+      if (counterTimes<textPostImageResult.length) {
+        counterTimes++;
+        conversation.appendChild(messageOkUpload);
+      }
+      messageBeforeCotumes.textContent =
+        'מה '
+        + (isMale ? 'אתה' : 'את') +
+        ' רוצה שוב?';
     }
+    console.log('counter after: '+counterTimes)
 
     setTimeout(function () {
       conversation.appendChild(messageBeforeCotumes);
@@ -164,59 +196,69 @@ function showCostumeOptions() {
       };*/
       async function listenerBatman() {
         selectedCostume = 'batman';
+        batmanButton.classList.add('clicked')
         removeListnersForCostumes();
         await showImageResults();
       };
 
       async function listenerCowboy() {
+        cowboyButton.classList.add('clicked')
         selectedCostume = 'cowboy';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerDoctor() {
+        doctorButton.classList.add('clicked')
         selectedCostume = 'doctor';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerFairy() {
+        fairyButton.classList.add('clicked')
         selectedCostume = 'fairy';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerHP() {
+        hpButton.classList.add('clicked')
         selectedCostume = 'hp';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerMadhat() {
+        madhatButton.classList.add('clicked')
         selectedCostume = 'madhat';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerPirate() {
+        pirateButton.classList.add('clicked')
         selectedCostume = 'pirate';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerSpiderman() {
+        spidermanButton.classList.add('clicked')
         selectedCostume = 'spiderman';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerWitch() {
+        witchButton.classList.add('clicked')
         selectedCostume = 'witch';
         removeListnersForCostumes();
         await showImageResults();
       }
 
       async function listenerWonder() {
+        wonderButton.classList.add('clicked')
         selectedCostume = 'wonder';
         removeListnersForCostumes();
         await showImageResults();
@@ -245,16 +287,24 @@ function showUploadButton() {
   messageUploadImage.classList.add('message', 'chatbot');
   const messageUploadP1 = document.createElement('p');
   const messageUploadP2 = document.createElement('p');
-  messageUploadP1.textContent = 'כדי שתוכלו להתלבש בתחפושת, קודם צריך לעלות תמונת פרופיל.';
-  messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אנו ממליצים לוודא שהצילום נעשה על רקע לבן, הראש פונה ישר למצלמה ומלבד הראש רואים את הצוואר ומעט מהכתפיים.';
+  const messageUploadP3 = document.createElement('p');
+  const messageUploadP4 = document.createElement('p');
+  messageUploadP1.textContent = 'כדי שאוכל להלביש אותך בתחפושת, ראשית '+
+                                  (isMale?'אתה צריך':'את צריכה')+
+                                 ' לעלות תמונת פרופיל שלך.';
+  ;
+  messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אני ממליצה להצטלם:';
+  messageUploadP3.textContent = '1. עם הפנים הפונות ישר למצלמה';
+  messageUploadP4.textContent = '2. על רקע לבן';
   messageUploadImage.appendChild(messageUploadP1);
-  messageUploadImage.appendChild(messageUploadP2);
+  messageUploadImage.appendChild(messageUploadP2)
+  messageUploadImage.appendChild(messageUploadP3);
+  messageUploadImage.appendChild(messageUploadP4);
   conversation.appendChild(messageUploadImage);
 
   // Create button message
-  const messageUploadImage2 = document.createElement('div');
-  messageUploadImage2.classList.add('message', 'chatbot','button-message');
-  conversation.appendChild(messageUploadImage2);
+  const messageUploadButton = document.createElement('div');
+  messageUploadButton.classList.add('message', 'chatbot','button-message');
   const uploadButton = document.createElement('button');
   uploadButton.textContent = 'העלאת תמונה';
   uploadButton.addEventListener('click', function handleFileUpload() {
@@ -272,7 +322,7 @@ function showUploadButton() {
             const dataUrl = event.target.result;
             localStorage.setItem('userPhoto', dataUrl);
             console.log('in handleFileSelect event load');
-
+            uploadButton.removeEventListener('click', handleFileUpload);
             // show for the first time
             setTimeout(function (){
               showCostumeOptions();
@@ -295,11 +345,10 @@ function showUploadButton() {
         }
       }
     console.log('end of showUploadButton');
-  uploadButton.removeEventListener('click', handleFileUpload);
 });
 
-  messageUploadImage2.appendChild(uploadButton);
-  conversation.appendChild(messageUploadImage2);
+  messageUploadButton.appendChild(uploadButton);
+  conversation.appendChild(messageUploadButton);
 }
 
 
@@ -336,6 +385,7 @@ function showGender() {
   messageGenderResult.classList.add('message', 'chatbot');
 
   async function listenerMale() {
+    maleButton.classList.add('clicked')
     setTimeout(function() {
       messageGenderResult.textContent = 'אין בעיה, אפנה אליך בלשון זכר';
       conversation.appendChild(messageGenderResult);
@@ -348,6 +398,7 @@ function showGender() {
   }
 
   async function listenerFemale() {
+    femaleButton.classList.add('clicked')
     setTimeout(function() {
       messageGenderResult.textContent = 'אין בעיה, אפנה אלייך בלשון נקבה';
       conversation.appendChild(messageGenderResult);
@@ -426,7 +477,7 @@ const initCropper = () => {
 function initPage() {
     const messageHello = document.createElement('div');
     messageHello.classList.add('message', 'chatbot');
-    messageHello.textContent = 'היי שלום';
+    messageHello.textContent = 'שלום לך';
     conversation.appendChild(messageHello);
 
   setTimeout(function() {
@@ -436,13 +487,26 @@ function initPage() {
     const messageWhoAmI1 = document.createElement('p');
     const messageWhoAmI2 = document.createElement('p');
     messageWhoAmI1.textContent = 'אני AI PuRIM';
-    messageWhoAmI2.textContent = 'הבינה המלאכותית שתראה איך תראו בתחפושות מסויימות';
+    messageWhoAmI2.textContent = 'הבינה המלאכותית שתלביש אותך בשלל תחפושות לפורים';
     messageWhoAmI.appendChild(messageWhoAmI1);
     messageWhoAmI.appendChild(messageWhoAmI2);
     conversation.appendChild(messageWhoAmI);
 
     setTimeout(function () {
-      showGender();
+
+      const messageHowDoes = document.createElement('div');
+      messageHowDoes.classList.add('message', 'chatbot');
+      const messageHowDoes1 = document.createElement('p');
+      const messageHowDoes2 = document.createElement('p');
+      messageHowDoes1.textContent = 'איך אני עובדת?'
+      messageHowDoes2.textContent = 'אני לוקחת את התמונת פנים שלך ותמונה של תחפושת לפורים ומעבדת אותן יחדיו לכדי יצירה אחת'
+      messageHowDoes.appendChild(messageHowDoes1);
+      messageHowDoes.appendChild(messageHowDoes2);
+      conversation.appendChild(messageHowDoes);
+
+      setTimeout(  function () {
+        showGender();
+      }, TIMEOUT);
     }, TIMEOUT);
   }, TIMEOUT);
 }
