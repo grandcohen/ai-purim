@@ -19,6 +19,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  background-color: var(--dark)
 }
 
 p {
@@ -213,16 +214,21 @@ button.clicked {
 
 /* For screens smaller than 768px (mobile devices) */
 @media (max-width: 767px) {
+  body {
+    background-color: var(--light);
+  }
+
   #chatbot {
     width: 100vw;
     height: 100vh;
     margin: 0;
     border-radius: 0;
+    overflow-x: hidden;
+    padding-bottom: 10px;
   }
 
   #conversation {
-    width: 100vw;
-    height: 100vh;
+    height: 100%;
   }
 
 }
