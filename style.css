@@ -109,6 +109,22 @@ button.clicked {
   background-color: var(--light);
 }
 
+.loader {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-ok {
+  display: block;
+}
+
 .line {
   margin-bottom: 6px;
 }
@@ -134,7 +150,7 @@ button.clicked {
 .user-image-doctor {
   position: absolute;
   left: 145px;
-  top: 80px;
+  top: 90px;
   width: 90px;
   height: 90px;
   object-fit: cover;

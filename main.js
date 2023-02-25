@@ -5,20 +5,6 @@ let counterTimes = 0;
 const lineBreak = document.createElement('br');
 const TIMEOUT = 800;
 
-const textPostImageResult = ['מצויין, התמונה עלתה',
-                              'אהבת?? אין אני מלכהההה. חחחח מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? וואי הרגת, אני פיפי',
-                              'נו איך יצא הפעם? טוב הא?',
-                                'העיקר בהתחלה צחקת עליי והנה תראה אותך.',
-                              isMale?'חחחח מישהו פה התמכר':'חחחח מישהי פה התמכרה',
-                              isMale?'אתה לא יכול בלעדיי הא?':'נשמההה מישהי פה נהיית אחות בלב',
-                              isMale?'טוב אתה מתחיל להגזים, זה מתחיל להיות בגדר הטרדה':'טוב מאמי אין לי באמת את כל היום, עוד אנשים רוצים לדבר איתי',
-                              isMale?'טוב חלאס. אני שמה את עצמי על בינה אוטומטית. סלמתק.':'טוב אני זזה, שמה את עצמי על בינה אוטומטית. ביי חיים.'];
-
-
-// CROP
-//const imageCropperOverlay = document.getElementById('image-cropper-overlay');
-//const imageToCrop = document.getElementById('image-to-crop');
-
 window.addEventListener('load', event => {
   localStorage.removeItem('userPhoto');
   localStorage.removeItem('selectedCostume');
@@ -30,18 +16,18 @@ function showImageResults() {
   const chatbotResponse = document.createElement('div');
   chatbotResponse.classList.add('message', 'chatbot', 'image-container');
   messagePreImageLoad.classList.add('message');
-  messagePreImageDone.classList.add('message')
+  messagePreImageDone.classList.add('message');
 
   if (counterTimes == 1) {
     messagePreImageLoad.textContent = 'אין בעיה, רק רגע בבקשה';
-    messagePreImageDone.textContent = 'סיימתי. ' +
+    messagePreImageDone.textContent = 'כמעט וסיימתי. ' +
                                         (isMale?'מוכן?':'מוכנה?');
     conversation.appendChild(messagePreImageLoad);
     conversation.scrollTop = conversation.scrollHeight;
 
-  } else if (counterTimes < textPostImageResult.length) {
+  } else if (counterTimes < textPostImageResultMale.length) {
     messagePreImageLoad.textContent = 'סבבה עובדת על זה';
-    messagePreImageDone.textContent = 'יאללה ' +
+    messagePreImageDone.textContent = 'יא אללה ' +
                                         (isMale?'קבל ':'מה ') +
                                         'הכנתי לך';
     conversation.appendChild(messagePreImageLoad);
@@ -58,20 +44,33 @@ function showImageResults() {
     conversation.scrollTop = conversation.scrollHeight;
 
     setTimeout(function () {
+      // create div for when pic didnt finish to upload
+
+      const messageWhileLoading = document.createElement('div');
+      messageWhileLoading.classList.add('loader');
+      messageWhileLoading.textContent = 'התמונה בטעינה...';
+      chatbotResponse.appendChild(messageWhileLoading);
+      conversation.appendChild(chatbotResponse);
+      conversation.scrollTop = conversation.scrollHeight;
+
       // uploaded
       const imgElement = document.createElement('img');
-      imgElement.classList.add('user-image-' + selectedCostume);
+      imgElement.classList.add('user-image-' + selectedCostume,'display-none');
       imgElement.src = localStorage.getItem('userPhoto');
       chatbotResponse.appendChild(imgElement);
       // our image
       const refElement = document.createElement('img');
+      refElement.classList.add('reference-image','display-none');
       refElement.src = 'img/' + selectedCostume + '.jpg';
-      refElement.classList.add('reference-image');
       chatbotResponse.appendChild(refElement);
 
-      conversation.appendChild(chatbotResponse);
-
       refElement.onload = () => {
+        /*conversation.appendChild(chatbotResponse);*/
+        refElement.classList.remove('display-none');
+        refElement.classList.add('display-ok')
+        imgElement.classList.remove('display-none');
+        imgElement.classList.add('display-ok')
+        chatbotResponse.removeChild(messageWhileLoading);
         conversation.scrollTop = conversation.scrollHeight;
       };
 
@@ -90,7 +89,12 @@ function showCostumeOptions() {
   messageBeforeCotumes.classList.add('message', 'chatbot');
   messageOkUpload.classList.add('message', 'chatbot');
 
-  messageOkUpload.textContent = textPostImageResult[counterTimes];
+  if (isMale) {
+    messageOkUpload.textContent = textPostImageResultMale[counterTimes];
+  } else {
+    messageOkUpload.textContent = textPostImageResultFemale[counterTimes];
+  }
+
   console.log('counter before: '+counterTimes)
 
   setTimeout( function () {
@@ -104,7 +108,7 @@ function showCostumeOptions() {
       conversation.scrollTop = conversation.scrollHeight;
 
     } else {
-      if (counterTimes<textPostImageResult.length) {
+      if (counterTimes<textPostImageResultMale.length) {
         counterTimes++;
         conversation.appendChild(messageOkUpload);
         conversation.scrollTop = conversation.scrollHeight;
@@ -343,17 +347,7 @@ function showUploadButton() {
             setTimeout(function (){
               showCostumeOptions();
             }, TIMEOUT);
-            /* CROPPER
-            imageToCrop.src = localStorage.getItem('userPhoto');
-            imageCropperOverlay.style.display = 'block';
-            imageToCrop.addEventListener('load', () => {
-              const cropperElement = document.createElement('img');
-              cropperElement.id = 'uploaded-image';
-              cropperElement.src = localStorage.getItem('userPhoto');
-              document.getElementById('overlay-body').appendChild(cropperElement);
-              cropper = initCropper();
-            });
-             */
+
 
           }, { once: true });
           reader.readAsDataURL(file);
@@ -436,64 +430,6 @@ function showGender() {
   }
 }
 
-////////////////////////////////////// CROPPING //////////////////////////////////////
-/*
-function createUserMessage(messageText) {
-  const messageContainer = document.createElement('div');
-  messageContainer.className = 'message message-user';
-
-  const messageContent = document.createElement('div');
-  messageContent.className = 'message-content';
-  messageContent.textContent = messageText;
-
-  messageContainer.appendChild(messageContent);
-
-  return messageContainer;
-}
-
-const buttonSaveCroppedImage = document.getElementById('save-cropped-image');
-buttonSaveCroppedImage.addEventListener('click', function() {
-  const canvas = cropper.getCroppedCanvas();
-  const croppedImage = new Image();
-  croppedImage.src = localStorage.getItem('userPhoto')
-  conversation.appendChild(createUserMessage(croppedImage));
-  imageCropperOverlay.style.display = 'none';
-});
-
-const initCropper = () => {
-  const image = document.getElementById('uploaded-image');
-  const cropper = new Cropper(image, {
-    aspectRatio: 1,
-  });
-  return cropper;
-};
-
-*/
-/////////////////////////////////END CROP///////////////////////////////////////////
-
-/*function showLoadingMessage(message) {
-  const chatbotResponse = document.createElement("div");
-  chatbotResponse.classList.add("message");
-
-  // Add the "loading dots" message
-  const loadingMessage = document.createElement("span");
-  loadingMessage.classList.add("loader");
-  chatbotResponse.appendChild(loadingMessage);
-
-  conversation.appendChild(chatbotResponse);
-  conversation.scrollTop = conversation.scrollHeight;
-
-  // Change the message after 2 seconds
-  setTimeout(() => {
-    loadingMessage.remove();
-
-    const messageHello = document.createElement('span');
-    messageHello.textContent = 'היי שלום';
-
-    chatbotResponse.appendChild(messageHello);
-  }, 2000);
-}*/
-
 function initPage() {
     const messageHello = document.createElement('div');
     messageHello.classList.add('message', 'chatbot');
@@ -537,4 +473,20 @@ function initPage() {
 // Code starts here
 initPage();
 
+const textPostImageResultFemale = ['מצויין, התמונה עלתה',
+  'חחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? וואי הרגת אני פיפי',
+  'נו מה את אומר? איך יצא הפעם? טוב הא?',
+  'העיקר בהתחלה צחקת עליי והנה תראי אותך',
+  'חחחח מישהי פה התמכרה',
+  'נשמההה מישהי פה נהיית אחות בלב',
+  'טוב מאמי אין לי באמת את כל היום, עוד אנשים רוצים לדבר איתי',
+  'טוב אני זזה, שמה את עצמי על בינה אוטומטית. ביי חיים.'];
 
+const textPostImageResultMale = ['מצויין, התמונה עלתה',
+  'חחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? וואי הרגת אני פיפי',
+  'נו מה אתה אומרת? איך יצא הפעם? טוב הא?',
+  'העיקר בהתחלה צחקת עליי והנה תראה אותך.',
+  'חחחח מישהו פה התמכר',
+  'אתה לא יכול בלעדיי הא?',
+  'טוב אתה מתחיל להגזים, זה מתחיל להיות בגדר הטרדה',
+  'טוב חלאס. אני שמה את עצמי על בינה אוטומטית. סלמתק.'];
