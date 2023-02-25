@@ -1,10 +1,3 @@
-:root {
-  --light: #F5EAEA;
-  --dark: #5D3891;
-  --accent: #F99417;
-  --dark2: #A459D1;
-}
-
 
 body {
   background-color: var(--dark);
@@ -68,8 +61,15 @@ p {
   height: 150px;
   display: block;
   animation: float 6s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+
+#sub-header {
+  color: var(--light);
+  margin-top: 10px;
   margin-bottom: 40px;
 }
+
 
 #overlay-btn {
   display: block;
@@ -83,6 +83,7 @@ p {
   color: var(--dark);
   background-color: var(--accent);
   border: none;
+  margin-bottom: 10px;
 }
 
 #start-btn:hover {
