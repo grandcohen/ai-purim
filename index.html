@@ -1,27 +1,54 @@
 <!DOCTYPE html>
 <html dir="rtl">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R50G5K3MY7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-R50G5K3MY7');
-  </script>
-
   <meta charset="UTF-8">
   <title>AI PuRIM</title>
   <link href="style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link href="welcome.css" rel="stylesheet">
+  <style>
+    /* Styling for the overlay */
+  </style>
 </head>
 <body>
-<div id="chatbot">
-  <div id="conversation">
-  </div>
+<div id="main-area">
+  <img src="img/logo.svg" alt="AI PuRIM" id="logo">
+  <button id="overlay-btn" class="welcome-button">מה זה זה?</button>
+  <button id="start-btn" class="welcome-button" onclick="location.href='chatbot.html';">אני רוצה לנסות</button>
 </div>
-<script src="main.js"></script>
+<div class="overlay" id="overlay">
+    <h1>היי שלום</h1>
+    <p>
+      ברוכים הבאים ל-<b> AI PuRIM</b><br>
+      בינה מלאכותית שמלבישה אתכם.ן בתחפושות לפורים.<br>
+      הבינה המלאכותית (או כפי שאנחנו קוראים לה בחבר'ה - בינת) משתמשת בטכנולוגייה הכי מתקדמות היום בשוק כדי ליצור היתוך מושלם בין תמונות.<br>
+      <br>
+      ומי אחראי על בינת?<br>
+      אחד בשם גיל כהן שמדבר על עצמו בגוף שלישי.<br>
+
+      ביום גיל הוא פרודקט דיזיינר ובלילה הוא ישן. לפעמים קשה לו לישון. פעם אמרו לו שזה כי כנראה חסר לו מלטונין. אבל מה עכשיו ללכת למעבדת שינה וזה. עדיף לבנות בינות.<br>
+      <br>
+      דברים נוספים שהוא היה שותף אליהם:<br>
+      <a href="https://treenderapp.com"><b>טרינדר</b></a>
+      אפליקציית ההכרויות לעצים<br>
+<a href="https://knesset.run"><b>      המירוץ לכנסת</b></a>
+      משחק שבו הפוליטקאים באמת רצים בשבילנו.
+    </p>
+    <button id="close-btn">ביי שלום</button>
+</div>
+<script>
+  // JavaScript to handle the overlay
+  const overlayBtn = document.getElementById('overlay-btn');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('close-btn');
+
+  overlayBtn.addEventListener('click', function() {
+    overlay.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', function() {
+    overlay.style.display = 'none';
+  });
+</script>
 </body>
 </html>

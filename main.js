@@ -136,70 +136,87 @@ function showCostumeOptions() {
       chatLine1.classList.add('line');
       chatLine2.classList.add('line');
 
-      messageCotumesButtons.appendChild(chatLine1);
+    /*  messageCotumesButtons.appendChild(chatLine1);
       messageCotumesButtons.appendChild(chatLine2);
-      messageCotumesButtons.appendChild(chatLine3);
+      messageCotumesButtons.appendChild(chatLine3);*/
 
       // Batman
       const batmanButton = document.createElement('button');
       batmanButton.textContent = 'בטמן';
+      batmanButton.classList.add('line');
       batmanButton.addEventListener('click', listenerBatman);
-      chatLine1.appendChild(batmanButton);
+      //chatLine1.appendChild(batmanButton);
+      messageCotumesButtons.appendChild(batmanButton);
 
       // Cowboy
       const cowboyButton = document.createElement('button');
       cowboyButton.textContent = isMale ? 'קאובוי' : 'קאוגירל';
+      cowboyButton.classList.add('line');
       cowboyButton.addEventListener('click', listenerCowboy);
-      chatLine1.appendChild(cowboyButton);
+      //chatLine1.appendChild(cowboyButton);
+      messageCotumesButtons.appendChild(cowboyButton);
 
       // Doctor
       const doctorButton = document.createElement('button');
       doctorButton.textContent = isMale ? 'רופא' : 'רופאה';
+      doctorButton.classList.add('line');
       doctorButton.addEventListener('click', listenerDoctor);
-      chatLine1.appendChild(doctorButton);
+      //chatLine1.appendChild(doctorButton);
+      messageCotumesButtons.appendChild(doctorButton);
 
       // Fairy
       const fairyButton = document.createElement('button');
       fairyButton.textContent = 'פייה';
+      fairyButton.classList.add('line');
       fairyButton.addEventListener('click', listenerFairy);
-      chatLine1.appendChild(fairyButton);
+      //chatLine1.appendChild(fairyButton);
+      messageCotumesButtons.appendChild(fairyButton);
+
 
       // HP
       const hpButton = document.createElement('button');
       hpButton.textContent = 'הארי פוטר';
+      hpButton.classList.add('line');
       hpButton.addEventListener('click', listenerHP);
-      chatLine2.appendChild(hpButton);
+      //chatLine2.appendChild(hpButton);
+      messageCotumesButtons.appendChild(hpButton);
 
       // Madhat
       const madhatButton = document.createElement('button');
       madhatButton.textContent = 'הכובען המטורף';
+      madhatButton.classList.add('line');
       madhatButton.addEventListener('click', listenerMadhat);
-      chatLine2.appendChild(madhatButton);
+      //chatLine2.appendChild(madhatButton);
+      messageCotumesButtons.appendChild(madhatButton);
 
       // Pirate
       const pirateButton = document.createElement('button');
       pirateButton.textContent = isMale ? 'פיראט' : 'פיראטית';
+      pirateButton.classList.add('line');
       pirateButton.addEventListener('click', listenerPirate);
-      chatLine2.appendChild(pirateButton);
+      //chatLine2.appendChild(pirateButton);
+      messageCotumesButtons.appendChild(fairyButton);
 
       // Spiderman
       const spidermanButton = document.createElement('button');
       spidermanButton.textContent = 'ספיידרמן';
       spidermanButton.addEventListener('click', listenerSpiderman);
-      chatLine3.appendChild(spidermanButton);
+      //chatLine3.appendChild(spidermanButton);
+      messageCotumesButtons.appendChild(spidermanButton);
 
       // Witch
       const witchButton = document.createElement('button');
       witchButton.textContent = isMale ? 'מכשף' : 'מכשפה';
       witchButton.addEventListener('click', listenerWitch);
-      chatLine3.appendChild(witchButton);
+      //chatLine3.appendChild(witchButton);
+      messageCotumesButtons.appendChild(witchButton);
 
       // Wonder
       const wonderButton = document.createElement('button');
       wonderButton.textContent = 'וונדר וומן';
       wonderButton.addEventListener('click', listenerWonder);
-      chatLine3.appendChild(wonderButton);
-
+      //chatLine3.appendChild(wonderButton);
+      messageCotumesButtons.appendChild(wonderButton);
 
       conversation.appendChild(messageCotumesButtons);
       conversation.scrollTop = conversation.scrollHeight;
@@ -310,7 +327,7 @@ function showUploadButton() {
   const messageUploadP4 = document.createElement('p');
   messageUploadP1.textContent = 'כדי שאוכל להלביש אותך בתחפושת, ראשית '+
                                   (isMale?'אתה צריך':'את צריכה')+
-                                 ' לעלות תמונת פרופיל שלך.';
+                                 ' לעלות תמונת פרופיל.';
   ;
   messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אני ממליצה להצטלם:';
   messageUploadP3.textContent = '1. תמונת פנים בלבד כאשר הן פונות ישר למצלמה';
@@ -366,7 +383,7 @@ function showUploadButton() {
 function showGender() {
   const messageBeforeGender = document.createElement('div');
   messageBeforeGender.classList.add('message', 'chatbot');
-  messageBeforeGender.textContent = 'לפני שנתחיל, איך לפנות אליך?';
+  messageBeforeGender.textContent = 'לפני שנתחיל, באיזו לשון פנייה להשתמש?';
   conversation.appendChild(messageBeforeGender);
   conversation.scrollTop = conversation.scrollHeight;
 
@@ -457,7 +474,7 @@ function initPage() {
       const messageHowDoes1 = document.createElement('p');
       const messageHowDoes2 = document.createElement('p');
       messageHowDoes1.textContent = 'איך אני עובדת?'
-      messageHowDoes2.textContent = 'אני לוקחת את התמונת פנים שלך ותמונה של תחפושת לפורים ומעבדת אותן יחדיו לכדי יצירה אחת'
+      messageHowDoes2.textContent = 'אני לוקחת את תמונת הפנים שלך ותמונה של תחפושת לפורים ומעבדת אותן יחדיו לכדי יצירה אחת'
       messageHowDoes.appendChild(messageHowDoes1);
       messageHowDoes.appendChild(messageHowDoes2);
       conversation.appendChild(messageHowDoes);
@@ -474,19 +491,17 @@ function initPage() {
 initPage();
 
 const textPostImageResultFemale = ['מצויין, התמונה עלתה',
-  'חחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? וואי הרגת אני פיפי',
-  'נו מה את אומר? איך יצא הפעם? טוב הא?',
-  'העיקר בהתחלה צחקת עליי והנה תראי אותך',
+  'חחחחחחחחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? כאילו אין לי משהו יותר טוב לעשות. היית צריכה לראות את האכזבה שלך בעיניים. וואי הרגת אני פיפי',
+  'נו מה את אומרת? פתאום זה קטע הא?', 'העיקר בהתחלה צחקת עליי והנה תראי אותך',
   'חחחח מישהי פה התמכרה',
   'נשמההה מישהי פה נהיית אחות בלב',
   'טוב מאמי אין לי באמת את כל היום, עוד אנשים רוצים לדבר איתי',
-  'טוב אני זזה, שמה את עצמי על בינה אוטומטית. ביי חיים.'];
+  'שמעי אני זזה, שמה את עצמי על בינה אוטומטית. את יכולה להמשיך ללחוץ אבל אני לא פה. ביי חיים.'];
 
 const textPostImageResultMale = ['מצויין, התמונה עלתה',
-  'חחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? וואי הרגת אני פיפי',
-  'נו מה אתה אומרת? איך יצא הפעם? טוב הא?',
-  'העיקר בהתחלה צחקת עליי והנה תראה אותך.',
+  'חחחחחחחחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? כאילו אין לי משהו יותר טוב לעשות. היית צריכה לראות את האכזבה שלך בעיניים. וואי הרגת אני פיפי',
+  'נו מה אתה אומר? איך יצא הפעם? אהבת?', 'העיקר בהתחלה צחקת עליי והנה תראה אותך.',
   'חחחח מישהו פה התמכר',
   'אתה לא יכול בלעדיי הא?',
-  'טוב אתה מתחיל להגזים, זה מתחיל להיות בגדר הטרדה',
-  'טוב חלאס. אני שמה את עצמי על בינה אוטומטית. סלמתק.'];
+  'מאמי אתה קצת מגזים. אין לך בינות אחרות לדבר איתן?',
+  'טוב חלאס. אני שמה את עצמי על בינה אוטומטית. מבחינתי תלחץ, תעשה מה בא לך אני עפתי. סלמתק.'];
