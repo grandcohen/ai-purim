@@ -58,17 +58,6 @@ function showImageResults() {
       conversation.appendChild(chatbotResponse);
       conversation.scrollTop = conversation.scrollHeight;
 
-     /* // uploaded
-      const imgElement = document.createElement('img');
-      imgElement.classList.add('user-image-' + selectedCostume,'display-none');
-      imgElement.src = localStorage.getItem('userPhoto');
-      chatbotResponse.appendChild(imgElement);
-      // our image
-      const refElement = document.createElement('img');
-      refElement.classList.add('reference-image','display-none');
-      refElement.src = 'img/' + selectedCostume + '.jpg';
-      chatbotResponse.appendChild(refElement);*/
-
       console.log('1');
       // uploaded
       const imgElement = document.createElement('img');
@@ -92,21 +81,6 @@ function showImageResults() {
         showReallyTheResults(refElement,imgElement,messageWhileLoading,chatbotResponse);
       }
 
-      /*(refElement.onload) = () => {
-        console.log('2')
-        conversation.appendChild(chatbotResponse);
-        refElement.classList.remove('display-none');
-        refElement.classList.add('display-ok')
-        imgElement.classList.remove('display-none');
-        imgElement.classList.add('display-ok')
-        chatbotResponse.removeChild(messageWhileLoading);
-        conversation.scrollTop = conversation.scrollHeight;
-        console.log('4')
-        setTimeout(function () {
-          console.log('5')
-          showCostumeOptions();
-        }, TIMEOUT);
-      };*/
     }, TIMEOUT+TIMEOUT);
   }, TIMEOUT);
 }
@@ -178,11 +152,6 @@ function showCostumeOptions() {
       chatLine1.classList.add('line');
       chatLine2.classList.add('line');
 
-    /*  messageCotumesButtons.appendChild(chatLine1);
-      messageCotumesButtons.appendChild(chatLine2);
-      messageCotumesButtons.appendChild(chatLine3);*/
-
-
       // HP
       const hpButton = document.createElement('button');
       hpButton.textContent = 'הארי פוטר';
@@ -198,15 +167,6 @@ function showCostumeOptions() {
       cowboyButton.addEventListener('click', listenerCowboy);
       //chatLine1.appendChild(cowboyButton);
       messageCotumesButtons.appendChild(cowboyButton);
-
-      // Doctor
-    /*  const doctorButton = document.createElement('button');
-      doctorButton.textContent = isMale ? 'רופא' : 'רופאה';
-      doctorButton.classList.add('line');
-      doctorButton.addEventListener('click', listenerDoctor);
-      //chatLine1.appendChild(doctorButton);
-      messageCotumesButtons.appendChild(doctorButton);*/
-
 
       // Witch
       const witchButton = document.createElement('button');
@@ -246,13 +206,6 @@ function showCostumeOptions() {
       //chatLine2.appendChild(pirateButton);
       messageCotumesButtons.appendChild(pirateButton);
 
-      // Spiderman
-      /*const spidermanButton = document.createElement('button');
-      spidermanButton.textContent = 'ספיידרמן';
-      spidermanButton.addEventListener('click', listenerSpiderman);
-      //chatLine3.appendChild(spidermanButton);
-      messageCotumesButtons.appendChild(spidermanButton);*/
-
       // Batman
       const batmanButton = document.createElement('button');
       batmanButton.textContent = 'בטמן';
@@ -265,13 +218,6 @@ function showCostumeOptions() {
 
       ////////////////////////// LISTEN FUNCTIONS //////////////////////////
 
-      /*async function listenerBatman() {
-        selectedCostume = 'batman';
-        removeListnersForCostumes();
-        setTimeout(function (){
-          showImageResults();
-        } , TIMEOUT);
-      };*/
       async function listenerBatman() {
         selectedCostume = 'batman';
         batmanButton.classList.add('clicked')
@@ -285,13 +231,6 @@ function showCostumeOptions() {
         removeListnersForCostumes();
         await showImageResults();
       }
-
-      /*async function listenerDoctor() {
-        doctorButton.classList.add('clicked')
-        selectedCostume = 'doctor';
-        removeListnersForCostumes();
-        await showImageResults();
-      }*/
 
       async function listenerFairy() {
         fairyButton.classList.add('clicked')
@@ -320,13 +259,6 @@ function showCostumeOptions() {
         removeListnersForCostumes();
         await showImageResults();
       }
-
-    /*  async function listenerSpiderman() {
-        spidermanButton.classList.add('clicked')
-        selectedCostume = 'spiderman';
-        removeListnersForCostumes();
-        await showImageResults();
-      }*/
 
       async function listenerWitch() {
         witchButton.classList.add('clicked')
