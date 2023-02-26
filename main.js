@@ -4,6 +4,8 @@ let isMale = true;
 let counterTimes = 0;
 const lineBreak = document.createElement('br');
 const TIMEOUT = 800;
+let isRefImageLoaded = false;
+let isUploadedImageLoaded = false;
 
 window.addEventListener('load', event => {
   localStorage.removeItem('userPhoto');
@@ -46,6 +48,9 @@ function showImageResults() {
     setTimeout(function () {
       // create div for when pic didnt finish to upload
 
+      isRefImageLoaded = false;
+      isUploadedImageLoaded = false;
+
       const messageWhileLoading = document.createElement('div');
       messageWhileLoading.classList.add('loader');
       messageWhileLoading.textContent = 'התמונה בטעינה...';
@@ -53,7 +58,7 @@ function showImageResults() {
       conversation.appendChild(chatbotResponse);
       conversation.scrollTop = conversation.scrollHeight;
 
-      // uploaded
+     /* // uploaded
       const imgElement = document.createElement('img');
       imgElement.classList.add('user-image-' + selectedCostume,'display-none');
       imgElement.src = localStorage.getItem('userPhoto');
@@ -62,25 +67,62 @@ function showImageResults() {
       const refElement = document.createElement('img');
       refElement.classList.add('reference-image','display-none');
       refElement.src = 'img/' + selectedCostume + '.jpg';
-      chatbotResponse.appendChild(refElement);
+      chatbotResponse.appendChild(refElement);*/
 
-      refElement.onload = () => {
-        /*conversation.appendChild(chatbotResponse);*/
+      console.log('1');
+      // uploaded
+      const imgElement = document.createElement('img');
+      imgElement.classList.add('user-image-' + selectedCostume);
+      imgElement.src = localStorage.getItem('userPhoto');
+
+      // our image
+      const refElement = document.createElement('img');
+      refElement.classList.add('reference-image');
+      refElement.src = 'img/' + selectedCostume + '.jpg';
+
+      refElement.onload  = () => {
+        console.log('2 refElement true')
+        isRefImageLoaded = true;
+        showReallyTheResults(refElement,imgElement,messageWhileLoading,chatbotResponse);
+      }
+
+      imgElement.onload  = () => {
+        console.log('2 imgElement true')
+        isUploadedImageLoaded = true;
+        showReallyTheResults(refElement,imgElement,messageWhileLoading,chatbotResponse);
+      }
+
+      /*(refElement.onload) = () => {
+        console.log('2')
+        conversation.appendChild(chatbotResponse);
         refElement.classList.remove('display-none');
         refElement.classList.add('display-ok')
         imgElement.classList.remove('display-none');
         imgElement.classList.add('display-ok')
         chatbotResponse.removeChild(messageWhileLoading);
         conversation.scrollTop = conversation.scrollHeight;
-      };
-
-
-
-      setTimeout(function () {
-        showCostumeOptions();
-      }, TIMEOUT);
+        console.log('4')
+        setTimeout(function () {
+          console.log('5')
+          showCostumeOptions();
+        }, TIMEOUT);
+      };*/
     }, TIMEOUT+TIMEOUT);
   }, TIMEOUT);
+}
+
+function showReallyTheResults(refImage, uploadedImage,messageWhileLoading,chatbotResponse) {
+  if (isRefImageLoaded && isUploadedImageLoaded) {
+    console.log('3')
+    chatbotResponse.appendChild(refImage);
+    chatbotResponse.appendChild(uploadedImage);
+    chatbotResponse.removeChild(messageWhileLoading);
+    conversation.scrollTop = conversation.scrollHeight;
+    setTimeout(function () {
+      console.log('4')
+      showCostumeOptions();
+    }, TIMEOUT);
+  }
 }
 
 function showCostumeOptions() {
@@ -140,13 +182,14 @@ function showCostumeOptions() {
       messageCotumesButtons.appendChild(chatLine2);
       messageCotumesButtons.appendChild(chatLine3);*/
 
-      // Batman
-      const batmanButton = document.createElement('button');
-      batmanButton.textContent = 'בטמן';
-      batmanButton.classList.add('line');
-      batmanButton.addEventListener('click', listenerBatman);
-      //chatLine1.appendChild(batmanButton);
-      messageCotumesButtons.appendChild(batmanButton);
+
+      // HP
+      const hpButton = document.createElement('button');
+      hpButton.textContent = 'הארי פוטר';
+      hpButton.classList.add('line');
+      hpButton.addEventListener('click', listenerHP);
+      //chatLine2.appendChild(hpButton);
+      messageCotumesButtons.appendChild(hpButton);
 
       // Cowboy
       const cowboyButton = document.createElement('button');
@@ -157,52 +200,13 @@ function showCostumeOptions() {
       messageCotumesButtons.appendChild(cowboyButton);
 
       // Doctor
-      const doctorButton = document.createElement('button');
+    /*  const doctorButton = document.createElement('button');
       doctorButton.textContent = isMale ? 'רופא' : 'רופאה';
       doctorButton.classList.add('line');
       doctorButton.addEventListener('click', listenerDoctor);
       //chatLine1.appendChild(doctorButton);
-      messageCotumesButtons.appendChild(doctorButton);
+      messageCotumesButtons.appendChild(doctorButton);*/
 
-      // Fairy
-      const fairyButton = document.createElement('button');
-      fairyButton.textContent = 'פייה';
-      fairyButton.classList.add('line');
-      fairyButton.addEventListener('click', listenerFairy);
-      //chatLine1.appendChild(fairyButton);
-      messageCotumesButtons.appendChild(fairyButton);
-
-
-      // HP
-      const hpButton = document.createElement('button');
-      hpButton.textContent = 'הארי פוטר';
-      hpButton.classList.add('line');
-      hpButton.addEventListener('click', listenerHP);
-      //chatLine2.appendChild(hpButton);
-      messageCotumesButtons.appendChild(hpButton);
-
-      // Madhat
-      const madhatButton = document.createElement('button');
-      madhatButton.textContent = 'הכובען המטורף';
-      madhatButton.classList.add('line');
-      madhatButton.addEventListener('click', listenerMadhat);
-      //chatLine2.appendChild(madhatButton);
-      messageCotumesButtons.appendChild(madhatButton);
-
-      // Pirate
-      const pirateButton = document.createElement('button');
-      pirateButton.textContent = isMale ? 'פיראט' : 'פיראטית';
-      pirateButton.classList.add('line');
-      pirateButton.addEventListener('click', listenerPirate);
-      //chatLine2.appendChild(pirateButton);
-      messageCotumesButtons.appendChild(fairyButton);
-
-      // Spiderman
-      const spidermanButton = document.createElement('button');
-      spidermanButton.textContent = 'ספיידרמן';
-      spidermanButton.addEventListener('click', listenerSpiderman);
-      //chatLine3.appendChild(spidermanButton);
-      messageCotumesButtons.appendChild(spidermanButton);
 
       // Witch
       const witchButton = document.createElement('button');
@@ -217,6 +221,44 @@ function showCostumeOptions() {
       wonderButton.addEventListener('click', listenerWonder);
       //chatLine3.appendChild(wonderButton);
       messageCotumesButtons.appendChild(wonderButton);
+
+      // Fairy
+      const fairyButton = document.createElement('button');
+      fairyButton.textContent = 'פייה';
+      fairyButton.classList.add('line');
+      fairyButton.addEventListener('click', listenerFairy);
+      //chatLine1.appendChild(fairyButton);
+      messageCotumesButtons.appendChild(fairyButton);
+
+      // Madhat
+      const madhatButton = document.createElement('button');
+      madhatButton.textContent = 'הכובען המטורף';
+      madhatButton.classList.add('line');
+      madhatButton.addEventListener('click', listenerMadhat);
+      //chatLine2.appendChild(madhatButton);
+      messageCotumesButtons.appendChild(madhatButton);
+
+      // Pirate
+      const pirateButton = document.createElement('button');
+      pirateButton.textContent = isMale ? 'פיראט' : 'פיראטית';
+      //pirateButton.classList.add('line');
+      pirateButton.addEventListener('click', listenerPirate);
+      //chatLine2.appendChild(pirateButton);
+      messageCotumesButtons.appendChild(pirateButton);
+
+      // Spiderman
+      /*const spidermanButton = document.createElement('button');
+      spidermanButton.textContent = 'ספיידרמן';
+      spidermanButton.addEventListener('click', listenerSpiderman);
+      //chatLine3.appendChild(spidermanButton);
+      messageCotumesButtons.appendChild(spidermanButton);*/
+
+      // Batman
+      const batmanButton = document.createElement('button');
+      batmanButton.textContent = 'בטמן';
+      batmanButton.addEventListener('click', listenerBatman);
+      //chatLine1.appendChild(batmanButton);
+      messageCotumesButtons.appendChild(batmanButton);
 
       conversation.appendChild(messageCotumesButtons);
       conversation.scrollTop = conversation.scrollHeight;
@@ -244,12 +286,12 @@ function showCostumeOptions() {
         await showImageResults();
       }
 
-      async function listenerDoctor() {
+      /*async function listenerDoctor() {
         doctorButton.classList.add('clicked')
         selectedCostume = 'doctor';
         removeListnersForCostumes();
         await showImageResults();
-      }
+      }*/
 
       async function listenerFairy() {
         fairyButton.classList.add('clicked')
@@ -279,12 +321,12 @@ function showCostumeOptions() {
         await showImageResults();
       }
 
-      async function listenerSpiderman() {
+    /*  async function listenerSpiderman() {
         spidermanButton.classList.add('clicked')
         selectedCostume = 'spiderman';
         removeListnersForCostumes();
         await showImageResults();
-      }
+      }*/
 
       async function listenerWitch() {
         witchButton.classList.add('clicked')
@@ -303,12 +345,12 @@ function showCostumeOptions() {
       function removeListnersForCostumes() {
         batmanButton.removeEventListener('click', listenerBatman);
         cowboyButton.removeEventListener('click', listenerCowboy);
-        doctorButton.removeEventListener('click', listenerDoctor);
+        //doctorButton.removeEventListener('click', listenerDoctor);
         fairyButton.removeEventListener('click', listenerFairy);
         hpButton.removeEventListener('click', listenerHP);
         madhatButton.removeEventListener('click', listenerMadhat);
         pirateButton.removeEventListener('click', listenerPirate);
-        spidermanButton.removeEventListener('click', listenerSpiderman);
+        //spidermanButton.removeEventListener('click', listenerSpiderman);
         witchButton.removeEventListener('click', listenerWitch);
         wonderButton.removeEventListener('click', listenerWonder);
       }
@@ -325,6 +367,7 @@ function showUploadButton() {
   const messageUploadP2 = document.createElement('p');
   const messageUploadP3 = document.createElement('p');
   const messageUploadP4 = document.createElement('p');
+  const messageUploadP5 = document.createElement('p');
   messageUploadP1.textContent = 'כדי שאוכל להלביש אותך בתחפושת, ראשית '+
                                   (isMale?'אתה צריך':'את צריכה')+
                                  ' לעלות תמונת פרופיל.';
@@ -332,10 +375,12 @@ function showUploadButton() {
   messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אני ממליצה להצטלם:';
   messageUploadP3.textContent = '1. תמונת פנים בלבד כאשר הן פונות ישר למצלמה';
   messageUploadP4.textContent = '2. על רקע לבן';
+  messageUploadP5.textContent = 'ואל דאגה, אני לא שומרת את התמונות שלך';
   messageUploadImage.appendChild(messageUploadP1);
   messageUploadImage.appendChild(messageUploadP2)
   messageUploadImage.appendChild(messageUploadP3);
   messageUploadImage.appendChild(messageUploadP4);
+  messageUploadImage.appendChild(messageUploadP5);
   conversation.appendChild(messageUploadImage);
   conversation.scrollTop = conversation.scrollHeight;
 
@@ -491,7 +536,7 @@ function initPage() {
 initPage();
 
 const textPostImageResultFemale = ['מצויין, התמונה עלתה',
-  'חחחחחחחחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? כאילו אין לי משהו יותר טוב לעשות. היית צריכה לראות את המבט שלך בעיניים. וואי הרגת אני פיפי',
+  'חחחחח אהבת?? באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? כאילו אין לי משהו יותר טוב לעשות. היית צריכה לראות את המבט שלך בעיניים. וואי אני פיפי',
   'נו מה את אומרת? פתאום זה קטע הא?', 'העיקר בהתחלה צחקת עליי והנה תראי אותך',
   'חחחח מישהי פה התמכרה',
   'נשמההה מישהי פה נהיית אחות בלב',
@@ -499,7 +544,7 @@ const textPostImageResultFemale = ['מצויין, התמונה עלתה',
   'שמעי אני זזה, שמה את עצמי על בינה אוטומטית. את יכולה להמשיך ללחוץ אבל אני לא פה. ביי חיים.'];
 
 const textPostImageResultMale = ['מצויין, התמונה עלתה',
-  'חחחחחחחחחח אהבת?? מה באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? כאילו אין לי משהו יותר טוב לעשות. היית צריך לראות את המבט שלך בעיניים. וואי הרגת אני פיפי',
+  'חחחחח אהבת?? באמת חשבת אני עכשיו אתחיל לעבד תמונות בשבילך? כאילו אין לי משהו יותר טוב לעשות. היית צריך לראות את המבט שלך בעיניים. וואי אני פיפי',
   'נו מה אתה אומר? איך יצא הפעם? אהבת?', 'העיקר בהתחלה צחקת עליי והנה תראה אותך.',
   'חחחח מישהו פה התמכר',
   'אתה לא יכול בלעדיי הא?',

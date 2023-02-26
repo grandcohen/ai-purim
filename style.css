@@ -90,7 +90,7 @@ button {
   /*font-size: 16px;*/
   font-size: 1rem;
   padding: 10px;
-  min-width: 70px;
+  min-width: 60px;
   border-radius: 5px;
   border: 2px solid var(--light);;
   background-color: transparent;
@@ -146,6 +146,7 @@ button.clicked {
   width: 80px;
   height: 80px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-doctor {
@@ -155,6 +156,7 @@ button.clicked {
   width: 90px;
   height: 90px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-fairy {
@@ -164,6 +166,7 @@ button.clicked {
   width: 80px;
   height: 80px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-madhat {
@@ -173,6 +176,7 @@ button.clicked {
   width: 100px;
   height: 100px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-hp {
@@ -182,6 +186,7 @@ button.clicked {
   width: 80px;
   height: 80px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-pirate {
@@ -191,6 +196,7 @@ button.clicked {
   width: 100px;
   height: 100px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-spiderman {
@@ -200,6 +206,7 @@ button.clicked {
   width: 80px;
   height: 80px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-witch {
@@ -209,6 +216,7 @@ button.clicked {
   width: 100px;
   height: 100px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-wonder {
@@ -218,6 +226,7 @@ button.clicked {
   width: 90px;
   height: 90px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 .user-image-batman {
@@ -227,6 +236,7 @@ button.clicked {
   width: 100px;
   height: 100px;
   object-fit: cover;
+  z-index: 9999;
 }
 
 /* For screens smaller than 768px (mobile devices) */
