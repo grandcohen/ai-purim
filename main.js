@@ -298,21 +298,15 @@ function showUploadButton() {
   const messageUploadP1 = document.createElement('p');
   const messageUploadP2 = document.createElement('p');
   const messageUploadP3 = document.createElement('p');
-  const messageUploadP4 = document.createElement('p');
-  const messageUploadP5 = document.createElement('p');
   messageUploadP1.textContent = 'כדי שאוכל להלביש אותך בתחפושת, ראשית '+
                                   (isMale?'אתה צריך':'את צריכה')+
                                  ' לעלות תמונת פרופיל.';
   ;
-  messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אני ממליצה להצטלם:';
-  messageUploadP3.textContent = '1. תמונת פנים בלבד כאשר הן פונות ישר למצלמה';
-  messageUploadP4.textContent = '2. על רקע לבן';
-  messageUploadP5.textContent = 'ואל דאגה, אני לא שומרת את התמונות שלך';
+  messageUploadP2.textContent = 'לתוצאות הטובות ביותר, אני ממליצה לצלם תמונת פנים בלבד כאשר הן פונות ישר למצלמה.';
+  messageUploadP3.textContent = 'ואל דאגה, אני לא שומרת את התמונות שלך.';
   messageUploadImage.appendChild(messageUploadP1);
   messageUploadImage.appendChild(messageUploadP2)
   messageUploadImage.appendChild(messageUploadP3);
-  messageUploadImage.appendChild(messageUploadP4);
-  messageUploadImage.appendChild(messageUploadP5);
   conversation.appendChild(messageUploadImage);
   conversation.scrollTop = conversation.scrollHeight;
 
@@ -360,7 +354,7 @@ function showUploadButton() {
 function showGender() {
   const messageBeforeGender = document.createElement('div');
   messageBeforeGender.classList.add('message', 'chatbot');
-  messageBeforeGender.textContent = 'לפני שנתחיל, באיזו לשון פנייה להשתמש?';
+  messageBeforeGender.textContent = 'לפני שנתחיל, באיזו לשון פנייה להשתמש כשאני מדברת איתך?';
   conversation.appendChild(messageBeforeGender);
   conversation.scrollTop = conversation.scrollHeight;
 
