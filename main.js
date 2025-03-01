@@ -85,15 +85,34 @@ function showImageResults() {
   }, TIMEOUT);
 }
 
-function showReallyTheResults(refImage, uploadedImage,messageWhileLoading,chatbotResponse) {
+function showReallyTheResults(refImage, uploadedImage, messageWhileLoading, chatbotResponse) {
+  // Add a timeout to prevent infinite waiting
+  const loadingTimeout = setTimeout(() => {
+    if (!isRefImageLoaded || !isUploadedImageLoaded) {
+      chatbotResponse.removeChild(messageWhileLoading);
+      const errorMsg = document.createElement('div');
+      errorMsg.textContent = 'טעינת התמונה נכשלה. נא לנסות שנית.';
+      errorMsg.classList.add('error-message');
+      chatbotResponse.appendChild(errorMsg);
+      
+      // Add a retry button
+      const retryButton = document.createElement('button');
+      retryButton.textContent = 'ניסיון נוסף';
+      retryButton.addEventListener('click', () => {
+        conversation.removeChild(chatbotResponse);
+        showCostumeOptions();
+      });
+      chatbotResponse.appendChild(retryButton);
+    }
+  }, 10000); // 10 second timeout
+  
   if (isRefImageLoaded && isUploadedImageLoaded) {
-    console.log('3')
+    clearTimeout(loadingTimeout);
     chatbotResponse.appendChild(refImage);
     chatbotResponse.appendChild(uploadedImage);
     chatbotResponse.removeChild(messageWhileLoading);
     conversation.scrollTop = conversation.scrollHeight;
-    setTimeout(function () {
-      console.log('4')
+    setTimeout(function() {
       showCostumeOptions();
     }, TIMEOUT);
   }
@@ -322,24 +341,33 @@ function showUploadButton() {
       fileInput.addEventListener('change', handleFileSelect);
       fileInput.click();
 
-      function handleFileSelect(event) { // added 'event' parameter to handleFileSelect function
+      function handleFileSelect(event) {
         const file = event.target.files[0];
-        if (file.type.match('image.*')) {
-          const reader = new FileReader();
-          reader.addEventListener('load', event => {
-            const dataUrl = event.target.result;
+        if (file && file.type.match('image.*')) {
+          // Show loading indicator
+          const loadingMessage = document.createElement('div');
+          loadingMessage.classList.add('message', 'chatbot');
+          loadingMessage.textContent = 'התמונה בטעינה...';
+          conversation.appendChild(loadingMessage);
+          conversation.scrollTop = conversation.scrollHeight;
+          
+          // Compress and resize image before storing
+          compressImage(file, function(dataUrl) {
             localStorage.setItem('userPhoto', dataUrl);
-            console.log('in handleFileSelect event load');
+            // Remove loading indicator
+            conversation.removeChild(loadingMessage);
             uploadButton.removeEventListener('click', handleFileUpload);
-            // show for the first time
-            setTimeout(function (){
+            setTimeout(function() {
               showCostumeOptions();
             }, TIMEOUT);
-
-
-          }, { once: true });
-          reader.readAsDataURL(file);
-          console.log('end of handleFileSelect');
+          });
+        } else {
+          // Show error message if file isn't an image
+          const errorMessage = document.createElement('div');
+          errorMessage.classList.add('message', 'chatbot');
+          errorMessage.textContent = 'אופס קרתה תקלה. נא לוודא שהקובץ הוא תמונה ולנסות שוב.';
+          conversation.appendChild(errorMessage);
+          conversation.scrollTop = conversation.scrollHeight;
         }
       }
     console.log('end of showUploadButton');
@@ -457,6 +485,64 @@ function initPage() {
     }, TIMEOUT);
   }, TIMEOUT);
 }
+
+// Add this new function to compress images
+function compressImage(file, callback) {
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const img = new Image();
+    img.onload = function() {
+      // Create canvas to resize image
+      const canvas = document.createElement('canvas');
+      // Determine size - limit to max 800px width/height
+      let width = img.width;
+      let height = img.height;
+      const maxSize = 800;
+      
+      if (width > height && width > maxSize) {
+        height = (height / width) * maxSize;
+        width = maxSize;
+      } else if (height > maxSize) {
+        width = (width / height) * maxSize;
+        height = maxSize;
+      }
+      
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Draw and compress image
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      // Get reduced-size data URL (0.8 quality)
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+      callback(dataUrl);
+    };
+    
+    img.onerror = function() {
+      alert('אירעה שגיאה בטעינת התמונה. נא לנסות שוב.');
+    };
+    
+    img.src = event.target.result;
+  };
+  
+  reader.onerror = function() {
+    alert('אירעה שגיאה בקריאת הקובץ. נא לנסות שוב.');
+  };
+  
+  reader.readAsDataURL(file);
+}
+
+function handleFileUpload() {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*';
+  // Add capture attribute for better mobile camera handling
+  fileInput.setAttribute('capture', 'user');
+  fileInput.addEventListener('change', handleFileSelect);
+  fileInput.click();
+}
+
 
 // Code starts here
 initPage();
